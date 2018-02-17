@@ -1,32 +1,78 @@
 package main
 
 import (
+	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
 // Require returnvalue to be 1
-func Test_equalateral_triangle(t *testing.T) {
+func TestEquilateralTriangle(t *testing.T) {
+	//Arrange & act
 	value := FindTriangle("2", "2", "2")
 
-	if value != 1 {
-		t.Errorf("Return value was wrong. Got: %d, expected: %d", value, 1)
-	}
+	//assertion
+	expectedValue := 1
+	assert.Equal(t, expectedValue, value, "Got: %d, expected: %d", value, expectedValue)
 }
 
 // Require returnvalue to be 2
-func Test_isosceles_triangle(t *testing.T) {
+func TestIsoscelesTriangle(t *testing.T) {
+	//Arrange & act
 	value := FindTriangle("1", "2", "2")
 
-	if value != 2 {
-		t.Errorf("Return value was wrong. Got: %d, expected: %d", value, 2)
-	}
+	//assertion
+	expectedValue := 2
+	assert.Equal(t, expectedValue, value, "Got: %d, expected: %d", value, expectedValue)
 }
 
 // Require returnvalue to be 3
-func Test_scalene_triangle(t *testing.T) {
+func TestScaleneTriangle(t *testing.T) {
+	//Arrange & act
+	value := FindTriangle("13", "9", "14")
+
+	//assertion
+	expectedValue := 3
+	assert.Equal(t, expectedValue, value, "Got: %d, expected: %d", value, expectedValue)
+}
+
+// Require returnvalue to be 3
+func TestInvalidTriangle(t *testing.T) {
+	//Arrange & act
+	value := FindTriangle("1", "2", "6")
+
+	//assertion
+	expectedValue := 4
+	assert.Equal(t, expectedValue, value, "Got: %d, expected: %d", value)
+}
+
+//Added from 16-02-2018 for the purpose of assignment #2
+
+//Should return 4 - Invalid
+func TestTriangleOne(t *testing.T) {
+	//Arrange & act
+	value := FindTriangle("3", "2", "8")
+
+	//assertion
+	expectedValue := 4
+	assert.Equal(t, expectedValue, value, "Got: %d, expected: %d", value, expectedValue)
+}
+
+//Should return 2 - Isosceles
+func TestTriangleTwo(t *testing.T) {
+	//Arrange & act
+	value := FindTriangle("10", "8", "8")
+
+	//assertion
+	expectedValue := 2
+	assert.Equal(t, expectedValue, value, "Got: %d, expected: %d", value, expectedValue)
+}
+
+//Should return 4 - Invalid
+func TestTriangleThree(t *testing.T) {
+	//Arrange & act
 	value := FindTriangle("1", "2", "3")
 
-	if value != 3 {
-		t.Errorf("Return value was wrong. Got: %d, expected: %d", value, 3)
-	}
+	//assertion
+	expectedValue := 4
+	assert.Equal(t, expectedValue, value, "Got: %d, expected: %d", value, expectedValue)
 }

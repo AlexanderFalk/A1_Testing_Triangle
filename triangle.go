@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strconv"
 	"strings"
 )
 
@@ -14,47 +15,79 @@ func check(e error) {
 	}
 }
 
-func scalene_triangle() {
+func scaleneTriangle() {
 	fmt.Println("Your triangle is of type: scalene triangle!")
 }
 
-func equilateral_triangle() {
-	fmt.Println("Your triangle is of type: equalateral triangle!")
+func equilateralTriangle() {
+	fmt.Println("Your triangle is of type: equilateral triangle!")
 }
 
-func isosceles_triangle() {
+func isoscelesTriangle() {
 	fmt.Println("Your triangle is of type: isosceles triangle!")
 }
 
-func FindTriangle(value1, value2, value3 string) int {
-	var returnValue int
-	if value1 == value2 && value2 == value3 {
-		equilateral_triangle()
-		returnValue = 1
-		return returnValue
-	}
-	if (value1 == value2 && value1 != value3) || (value2 == value3 && value2 != value1) || (value1 == value3 && value1 != value2) {
-		isosceles_triangle()
-		returnValue = 2
-		return returnValue
-	}
-	if value1 != value2 && value2 != value3 && value1 != value3 {
-		scalene_triangle()
-		returnValue = 3
-		return returnValue
-	}
+func invalid() {
+	fmt.Println("That is not a triangle my dear friend...")
+}
 
+//FindTriangle takes three parameters, which is the length of each side of a triangle
+//It will then determine whether the triangle is:
+//Scalene - No sides are equal
+//Equalateral - All sides are equal
+//Isosceles - Atleast two sides are equal
+//The function also checks for invalid triangles
+func FindTriangle(value1, value2, value3 string) int {
+
+	a, err := strconv.Atoi(value1)
+	check(err)
+	b, err := strconv.Atoi(value2)
+	check(err)
+	c, err := strconv.Atoi(value3)
+	check(err)
+
+	//Used to check specific triangle test cases
+	var returnValue int
+
+	// Checks whether a triangle is valid or not. For a Triangle to be valid, you'll need the following formula:
+	// a + b > c
+	// a + c > b
+	// b + c > a
+	// If all is true, then you've a valid triangle
+	if (a+b) > c && (a+c) > b && (b+c) > a {
+
+		if value1 == value2 && value2 == value3 {
+			equilateralTriangle()
+			returnValue = 1
+			return returnValue
+		}
+		if (value1 == value2 && value1 != value3) || (value2 == value3 && value2 != value1) || (value1 == value3 && value1 != value2) {
+			isoscelesTriangle()
+			returnValue = 2
+			return returnValue
+		}
+
+		if value1 != value2 && value2 != value3 && value1 != value3 {
+			scaleneTriangle()
+			returnValue = 3
+			return returnValue
+		}
+	} else {
+		invalid()
+		returnValue = 4
+		return returnValue
+	}
 	return 0
 }
 
 func main() {
-	triangle_test := flag.NewFlagSet("whatis", flag.ExitOnError)
-	values := triangle_test.String("values", "", "Add three values to test what type the triangle is")
+	triangleTest := flag.NewFlagSet("find", flag.ExitOnError)
+	values := triangleTest.String("values", "", "Add three values to test what type the triangle is")
 	fmt.Println(*values)
 	var arrayValues []string
 	switch os.Args[1] {
-	case "whatis":
-		err := triangle_test.Parse(os.Args[2:])
+	case "find":
+		err := triangleTest.Parse(os.Args[2:])
 		check(err)
 		arrayValues = strings.Split(*values, " ")
 		fmt.Println("First value: ", arrayValues[0])
@@ -64,25 +97,8 @@ func main() {
 	default:
 		fmt.Printf("%s", "Error")
 	}
-	if triangle_test.Parsed() {
+	if triangleTest.Parsed() {
 		fmt.Println("Values inserted...", os.Args[2:])
 		FindTriangle(arrayValues[0], arrayValues[1], arrayValues[2])
-		/*
-			if arrayValues[0] == arrayValues[1] && arrayValues[1] == arrayValues[2] {
-				equilateral_triangle()
-				returnValue = 1
-				return returnValue
-			}
-			if (arrayValues[0] == arrayValues[1] && arrayValues[0] != arrayValues[2]) || (arrayValues[1] == arrayValues[2] && arrayValues[1] != arrayValues[0]) || (arrayValues[0] == arrayValues[2] && arrayValues[0] != arrayValues[1]) {
-				isosceles_triangle()
-				returnValue = 2
-				return returnValue
-			}
-			if arrayValues[0] != arrayValues[1] && arrayValues[1] != arrayValues[2] && arrayValues[0] != arrayValues[2] {
-				scalene_triangle()
-				returnValue = 3
-				return returnValue
-			}
-		*/
 	}
 }
