@@ -76,3 +76,23 @@ func TestTriangleThree(t *testing.T) {
 	expectedValue := 4
 	assert.Equal(t, expectedValue, value, "Got: %d, expected: %d", value, expectedValue)
 }
+
+//Checks for zero length values
+func TestCheckZeroLengthValue(t *testing.T) {
+	//Arrange & act
+	value := FindTriangle("0", "2", "3")
+
+	//assertion
+	expectedValue := 0
+	assert.Equal(t, expectedValue, value, "Got: %d, expected: %d", value, expectedValue)
+}
+
+//Should return 4 - Invalid
+func TestCheckMinusValue(t *testing.T) {
+	//Arrange & act
+	value := FindTriangle("1", "2", "-2")
+
+	//assertion
+	expectedValue := 0
+	assert.Equal(t, expectedValue, value, "Got: %d, expected: %d", value, expectedValue)
+}

@@ -20,7 +20,7 @@ func scaleneTriangle() {
 }
 
 func equilateralTriangle() {
-	fmt.Println("Your triangle is of type: equilateral triangle!")
+	fmt.Println("Your triangle is of type: equi lateral triangle!")
 }
 
 func isoscelesTriangle() {
@@ -54,6 +54,10 @@ func FindTriangle(value1, value2, value3 string) int {
 	// a + c > b
 	// b + c > a
 	// If all is true, then you've a valid triangle
+	if (a == 0 || b == 0 || c == 0) || a < 0 || b < 0 || c < 0 {
+		fmt.Println("A triangle can't be 0 in one of its length or it can't be any minus value")
+		return 0
+	}
 	if (a+b) > c && (a+c) > b && (b+c) > a {
 
 		if value1 == value2 && value2 == value3 {
@@ -77,6 +81,7 @@ func FindTriangle(value1, value2, value3 string) int {
 		returnValue = 4
 		return returnValue
 	}
+
 	return 0
 }
 
