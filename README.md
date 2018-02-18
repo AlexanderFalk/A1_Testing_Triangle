@@ -11,7 +11,7 @@ This will compile and build the program to use. You'll on Windows get an .exe fi
 For Windows you in your command-prompt type the following example:
 
 ```bash
-triangle.exe whatis --values "1 2 2"
+triangle.exe find --values "1 2 2"
 ```
 
 Which will return:
@@ -23,7 +23,7 @@ Your triangle is of type: isosceles triangle!
 On MacOS/Linux you can do the same, just with a little adjustment:
 
 ```bash
-./triangle whatis --values "2 2 2"
+./triangle find --values "2 2 2"
 ```
 
 Which will return:
@@ -47,16 +47,34 @@ You've to be located at the folder location to make the test. This will automati
 Based on the Unit Testing from the file you'll see a respone in the console similiar to below, unless you change the values in the test file:
 
 ```bash
-=== RUN   Test_equalateral_triangle
-Your triangle is of type: equalateral triangle!
---- PASS: Test_equalateral_triangle (0.00s)
-=== RUN   Test_isosceles_triangle
+=== RUN   TestEquilateralTriangle
+Your triangle is of type: equi lateral triangle!
+--- PASS: TestEquilateralTriangle (0.00s)
+=== RUN   TestIsoscelesTriangle
 Your triangle is of type: isosceles triangle!
---- PASS: Test_isosceles_triangle (0.00s)
-=== RUN   Test_scalene_triangle
+--- PASS: TestIsoscelesTriangle (0.00s)
+=== RUN   TestScaleneTriangle
 Your triangle is of type: scalene triangle!
---- PASS: Test_scalene_triangle (0.00s)
+--- PASS: TestScaleneTriangle (0.00s)
+=== RUN   TestInvalidTriangle
+That is not a triangle my dear friend...
+--- PASS: TestInvalidTriangle (0.00s)
+=== RUN   TestTriangleOne
+That is not a triangle my dear friend...
+--- PASS: TestTriangleOne (0.00s)
+=== RUN   TestTriangleTwo
+Your triangle is of type: isosceles triangle!
+--- PASS: TestTriangleTwo (0.00s)
+=== RUN   TestTriangleThree
+That is not a triangle my dear friend...
+--- PASS: TestTriangleThree (0.00s)
+=== RUN   TestCheckZeroLengthValue
+A triangle can't be 0 in one of its length or it can't be any minus value
+--- PASS: TestCheckZeroLengthValue (0.00s)
+=== RUN   TestCheckMinusValue
+A triangle can't be 0 in one of its length or it can't be any minus value
+--- PASS: TestCheckMinusValue (0.00s)
 PASS
-ok
+ok      testcourse/a1_triangle  0.078s
 ```
 
